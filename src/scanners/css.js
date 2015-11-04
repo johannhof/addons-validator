@@ -17,20 +17,16 @@ export default class CSSScanner extends BaseScanner {
           if (ast && ast.stylesheet && ast.stylesheet.rules) {
             var rules = ignorePrivateFunctions(_rules);
 
-            for (let cssInstruction in rules) {
+            for (let cssRule in rules) {
               this._rulesProcessed++;
 
-              for (let cssCode of ast.stylesheet.rules) {
-                if (cssCode.type === 'comment') {
+              for (let rule of ast.stylesheet.rules) {
+                if (rule.type === 'comment') {
                   continue;
                 }
 
                 this.validatorMessages = this.validatorMessages.concat(
-                  rules[cssInstruction](cssCode, cssCode.position.source,{
-                    startLine: cssCode.position.start.line,
-                    startColumn: cssCode.position.start.column,
-                  })
-                );
+                  rules[cssRule](rule));
               }
             }
           }

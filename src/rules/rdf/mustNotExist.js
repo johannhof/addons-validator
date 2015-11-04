@@ -4,7 +4,7 @@ import * as messages from 'messages';
 
 
 export function mustNotExist(xmlDoc, filename=null,
-    {namespace}={}) {
+                             namespace='http://www.mozilla.org/2004/em-rdf#') {
   return new Promise((resolve) => {
     var bannedTags = RDF_UNALLOWED_TAGS;
     var validatorMessages = [];
